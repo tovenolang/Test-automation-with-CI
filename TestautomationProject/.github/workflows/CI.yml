@@ -1,4 +1,4 @@
-name: Testautomatisation project
+name: Testautomation project
 
 on:
   push: {}
