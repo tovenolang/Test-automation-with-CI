@@ -18,13 +18,13 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore IntegrationTestProject.Test/IntegrationTestProject.csproj
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build IntegrationTestProject.Test/IntegrationTestProject.csproj --no-restore --configuration Release
 
       - name: Test
-        run: dotnet test --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test_results.trx"
+        run: dotnet test IntegrationTestProject.Test/IntegrationTestProject.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test_results.trx"
 
       - name: Upload test results
         if: always()
