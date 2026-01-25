@@ -47,6 +47,7 @@ public class ProductTests
         // Arrange
         using var client = new HttpClient();
         client.BaseAddress = new Uri("https://fakestoreapi.com/");
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("IntegrationTests/1.0");
 
         // Act
         var response = await client.GetAsync($"products");
