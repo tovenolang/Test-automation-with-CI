@@ -18,14 +18,14 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore
-        run: dotnet restore IntegrationTestProject.Test/IntegrationTestProject.Test.csproj
-
+        run: dotnet restore "Testautomation project/IntegrationTestProject.Test/IntegrationTestProject.Test.csproj"
+      
       - name: Build
-        run: dotnet build IntegrationTestProject.Test/IntegrationTestProject.Test.csproj --no-restore --configuration Release
-
+        run: dotnet build "Testautomation project/IntegrationTestProject.Test/IntegrationTestProject.Test.csproj" --no-restore --configuration Release
+      
       - name: Test
-        run: dotnet test IntegrationTestProject.Test/IntegrationTestProject.Test.csproj --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test_results.trx"
-
+        run: dotnet test "Testautomation project/IntegrationTestProject.Test/IntegrationTestProject.Test.csproj" --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test_results.trx"
+      
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
