@@ -14,6 +14,10 @@ public class ProductTests
         using var client = new HttpClient();
         client.BaseAddress = new Uri("https://fakestoreapi.com/");
         client.DefaultRequestHeaders.UserAgent.ParseAdd("IntegrationTests/1.0");
+        client.DefaultRequestHeaders.UserAgent.ParseAdd(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
+        client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
 
         // Act
         var response = await client.GetAsync("products");
@@ -61,3 +65,4 @@ public class ProductTests
         Assert.Equal(20, products.Count());
     }
 }
+
