@@ -41,6 +41,7 @@ public class ProductTests
         var product = JsonSerializer.Deserialize<Product>(content, JsonOptions);
 
         // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.NotNull(product);
         Assert.Equal(productId, product.Id);
         Assert.Equal("Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", product.Title);
@@ -61,8 +62,10 @@ public class ProductTests
         var products = JsonSerializer.Deserialize<List<Product>>(content, JsonOptions);
 
         // Assert
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.NotNull(products);
         Assert.Equal(20, products.Count());
     }
 }
+
 
