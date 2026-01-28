@@ -38,6 +38,12 @@ public class ProductTests
         // Act
         var response = await client.GetAsync($"products/{productId}");
         var content = await response.Content.ReadAsStringAsync();
+        var contentType = response.Content.Headers.ContentType?.MediaType;
+        if (contentType == null || !contentType.Contains("application/json"))
+        {
+            throw new Xunit.Sdk.XunitException(
+                $"Expected JSON but got '{contentType}'. Body:\n{content}");
+        }
         var product = JsonSerializer.Deserialize<Product>(content, JsonOptions);
 
         // Assert
@@ -59,6 +65,12 @@ public class ProductTests
         // Act
         var response = await client.GetAsync($"products");
         var content = await response.Content.ReadAsStringAsync();
+        var contentType = response.Content.Headers.ContentType?.MediaType;
+        if (contentType == null || !contentType.Contains("application/json"))
+        {
+            throw new Xunit.Sdk.XunitException(
+                $"Expected JSON but got '{contentType}'. Body:\n{content}");
+        }
         var products = JsonSerializer.Deserialize<List<Product>>(content, JsonOptions);
 
         // Assert
@@ -67,5 +79,6 @@ public class ProductTests
         Assert.Equal(20, products.Count());
     }
 }
+
 
 
