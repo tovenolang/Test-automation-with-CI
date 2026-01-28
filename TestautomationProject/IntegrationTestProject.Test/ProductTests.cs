@@ -16,7 +16,7 @@ public class ProductTests
         client.DefaultRequestHeaders.UserAgent.ParseAdd("IntegrationTests/1.0");
 
         // Act
-        var response = await client.GetAsync("products");
+        var response = await client.GetAsync($"products");
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -34,7 +34,7 @@ public class ProductTests
         // Act
         var response = await client.GetAsync($"products/{productId}");
         var content = await response.Content.ReadAsStringAsync();
-        Assert.True(response.IsSuccessStatusCode);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var product = JsonSerializer.Deserialize<Product>(content, JsonOptions);
 
         // Assert
@@ -55,7 +55,7 @@ public class ProductTests
 
         // Act
         var response = await client.GetAsync($"products");
-        Assert.True(response.IsSuccessStatusCode);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var content = await response.Content.ReadAsStringAsync();
         var products = JsonSerializer.Deserialize<List<Product>>(content, JsonOptions);
 
@@ -65,6 +65,7 @@ public class ProductTests
         Assert.Equal(20, products.Count());
     }
 }
+
 
 
 
